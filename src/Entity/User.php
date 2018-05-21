@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,9 +23,36 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Expense", mappedBy="user")
+     */
+    private $expense;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->expense = new ArrayCollection();
     }
+
+    /**
+     * @param Expense $expense
+     * @return $this
+     */
+    public function addExpense(Expense $expense){
+        $this->expense[] = $expense;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpense()
+    {
+        return $this->expense;
+    }
+
+    public function removeMinerResult(Expense $expense)
+    {
+        $this->expense->removeElement($expense);
+    }
+
 }
