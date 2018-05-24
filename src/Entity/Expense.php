@@ -5,36 +5,43 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\ExpenseRepository")
  * @ORM\Table(name="expense")
- * @ExclusionPolicy("none")
+ * @ExclusionPolicy("all")
  */
 class Expense
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Expose
      */
     protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Expose
      */
     protected $name;
 
     /**
      * @var integer
      * @ORM\Column(type="integer")
+     * @Expose
      */
     protected $price;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true, unique=true)
+     * @Expose
      */
     protected $identifier;
 
@@ -43,6 +50,12 @@ class Expense
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
+    }
 
     /**
      * @return mixed
