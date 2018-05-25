@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Model;
 
 /**
  * @Route("/api")
@@ -28,7 +30,15 @@ class ApiController extends FOSRestController
 
     /**
      *  @Get("/expenses")
-     *
+     *  @SWG\Parameter( name="Authorization", in="header", required=true, type="string", default="Bearer TOKEN", description="Authorization" )
+     *  @SWG\Response(
+     *     response=200,
+     *     description="Returns the expenses of an user",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=App\Entity\Expense::class))
+     *     )
+     * )
      */
     public function getExpensesByUser(Request $request){
         $response = new JsonResponse();
@@ -53,6 +63,15 @@ class ApiController extends FOSRestController
      *  @Get("/expensesByTime")
      *  @QueryParam(name="dateStart", requirements="\d\d\d\d-\d\d-\d\d", default="2017-01-01", description="First date of expenses filtered")
      *  @QueryParam(name="dateEnd", requirements="\d\d\d\d-\d\d-\d\d", default="2018-01-01", description="Last date of expenses filtered")
+     *  @SWG\Parameter( name="Authorization", in="header", required=true, type="string", default="Bearer TOKEN", description="Authorization" )
+     *  @SWG\Response(
+     *     response=200,
+     *     description="Returns the expenses of an user by time",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @SWG\Items(ref=@Model(type=App\Entity\Expense::class))
+     *     )
+     * )
      *
      */
     public function getExpensesByTimeAndUser(Request $request){
