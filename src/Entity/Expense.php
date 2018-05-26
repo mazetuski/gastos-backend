@@ -40,7 +40,7 @@ class Expense
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=true, unique=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Expose
      */
     protected $identifier;

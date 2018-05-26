@@ -251,10 +251,16 @@
     "symfony/options-resolver": {
         "version": "v4.0.9"
     },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
+    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.8.0"
     },
     "symfony/polyfill-mbstring": {
+        "version": "v1.8.0"
+    },
+    "symfony/polyfill-php72": {
         "version": "v1.8.0"
     },
     "symfony/process": {
@@ -322,6 +328,9 @@
     },
     "symfony/validator": {
         "version": "v4.0.9"
+    },
+    "symfony/var-dumper": {
+        "version": "v4.0.11"
     },
     "symfony/web-server-bundle": {
         "version": "3.3",
